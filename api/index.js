@@ -32,7 +32,7 @@ app.post("/",async (req,res)=>{//make sure the data is in this format only, need
         // issue auth token to identify user and maintain his history or ask user to send history from fe, co=hoosing the 
         // second one for now
 
-        let prompt= `${questionData}`;
+        let prompt= questionData;
 
         let result = await model.generateContent(prompt);
         chatHistory.push({role:"bot",message:result.response.candidates[0].content.parts[0].text})
@@ -65,7 +65,7 @@ app.post("/",async (req,res)=>{//make sure the data is in this format only, need
 
 app.get("*",(req,res)=>{
     res.status(400).json({
-        message: "You typed wrong URL, goto '/' to start asking questions"
+        message: "You typed wrong URL, send a post request to 'https://10x-answers.vercel.app/' endpoint to start asking questions"
     })
 })
 
